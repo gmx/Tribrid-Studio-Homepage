@@ -1,0 +1,358 @@
+<html>
+<head>
+	<title>Tribrid Studio</title>
+	<style type="text/css">		
+		div.marble {
+			position: absolute;
+			width: 75px;
+			height: 75px;
+			/* background-color: #fd642f; */
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+			opacity: 0.5;
+			z-index: 999;
+			/* -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.9); */
+			-moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+			background: -moz-linear-gradient(center top , #fc642f, #ba4922) repeat scroll 0 0 transparent;
+			background: -webkit-gradient(linear, left top, left bottom, from(#fc642f), to(#ba4922));
+		}
+		
+		.inner_text {
+			margin: 20px 20px;	
+			font-family: Monaco;
+			font-size: 30px;
+			font-weight: bold;
+			color: #EEE;
+			text-align: center;
+		}
+		
+		#under_line {
+			border-top: 1px solid #EEE;
+			position: absolute;
+			top: 376px;
+			left: 200px;
+			/*right: 200px;*/
+			opacity: 0;
+		}
+		
+		#inner_wrapper {
+			color: #6c6c6c;
+			font-family: Georgia;
+			font-size: 50px;
+			height: 200px;
+			left: 200px;
+			position: absolute;
+			right: 200px;
+			top: 280px;
+			z-index: 1500;
+			display:none;
+			text-shadow: 0 0 2px;	
+		}
+		
+		#slogan {
+			font-size: 18px;
+			display: none;
+			text-shadow: 0 0 1px;
+		}
+		
+		#inner_wrapper2 {
+			color: #AAA;
+			font-family: Georgia;
+			height: 200px;
+			position: absolute;
+			left: 750px;
+			top: 280px;
+			z-index: 1501;
+		}		
+		
+		#inner_wrapper2 li {
+			list-style-type: square;
+			color: #5c5c5c;
+			text-shadow: 0 0 1px;
+		}
+		
+		#inner_wrapper3 {
+			color:#AAAAAA;
+			font-family:Georgia;
+			font-size:20px;
+			left:200px;
+			position:absolute;
+			top:390px;
+			display: none;
+			z-index: 1508;
+		}
+		
+		.tweet_container {
+			float: left;
+			width: 320px;
+			margin: 10px;
+			background-color: #DDD;
+			min-height: 100px;
+			padding: 10px;
+		}
+		
+		#tweet {
+			width: 340px;
+		}
+		
+		.mail_container {
+			float: left;
+			width: 320px;
+			margin: 10px;
+			background-color: #DDD;
+			min-height: 100px;
+			padding: 10px;			
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			/*background-image: url(../demo/images/bg.jpg);
+			background-repeat: no-repeat;*/
+		}
+
+		#dev {
+			width: 100%;
+			height: 100%;
+			border: 0;
+			margin: 0;
+			padding: 0;
+			display: none;	
+		}
+		
+	</style>
+	<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#dev').load(function(){
+				// $(this).fadeIn('slow');	
+			});
+
+			var elem_1, elem_2, elem_3;
+			elem_1 = $(".marble").animate({
+				"left":"500px",
+				"top":"300px"
+			},"fast","linear", function(){
+				$(this).animate({
+					"opacity":"0.85"
+				},"slow",function(){
+
+					$(this).html("<img src='idea.png' />");
+					// $(".inner_text",this).html("T");
+					
+					var z_index = $(this).css("z-index") + 1;
+					var left = $(this).offset().left + 80 + "px";
+
+					elem_2 = $(this).clone().prependTo("#wrapper").css({
+						"background": "-moz-linear-gradient(center top , #16d316, #109b10) repeat scroll 0 0 transparent"
+					}).animate({
+						"z-index": z_index,
+						"left": left						
+					},"slow",function(){
+						
+						$(this).html("<img src='tech.png' />");
+						
+						var z_index = $(this).css("z-index") + 1;
+						var left = $(this).offset().left + 80 + "px";						
+						
+						elem_3 = $(this).clone().prependTo("#wrapper").css({
+							"background": "-moz-linear-gradient(center top , #1862f6, #1248b5) repeat scroll 0 0 transparent"
+						}).animate({
+							"z-index": z_index,
+							"left": left
+						},"slow",function(){
+						//$(".inner_text",this).html("S");		
+							
+						$(this).html("<img src='penbrush.png' />");
+
+							$(".marble").animate({
+								"opacity": "0.9"
+							},"slow");
+											
+							$("#under_line").animate({
+								"opacity": "1",
+								"right": "200px"
+							});
+							
+							$("#inner_wrapper").show("slow");
+							
+							var str = "Tribrid Studio";
+							
+							var i = 0;
+							var count = str.length;
+							var timer_id = setInterval(function(){
+								
+								if( i != count )
+									$("#inner_wrapper").append( str[i] );
+								else {
+									
+									var slogan = $("<span id='slogan'>Dreams and Idea</span>").appendTo("#inner_wrapper");
+									
+									slogan.fadeIn("slow").css({
+										'display':'block'
+									});
+									
+									// var svlist = [
+									// 	'Web Design',
+									// 	'Web Development',
+									// 	'Application Development',
+									// 	'IT Consulting'
+									// ];
+									
+									// var k = 0;
+									// var count = svlist.length;
+									
+									// $("#inner_wrapper2").empty().append('<ul></ul>');
+									// var timer2_id = setInterval(function(){
+										
+									// 	if ( k != count )
+									// 		$("#inner_wrapper2 ul").append('<li>' + svlist[k] + '</li>');
+									// 	else
+									// 		clearInterval( timer2_id );
+										
+									// },100);
+									
+									var top = elem_1.offset().top;
+									var new_top = top - 20;
+									
+									elem_1.animate({
+										"top": new_top
+									},"slow",function(){
+										
+										$(this).animate({
+											"top": new_top + 20
+										},"fast");
+										
+										$("#inner_wrapper3").fadeIn("fast");	
+									});
+									
+									
+									
+									clearInterval( timer_id );
+								}
+									
+								
+								i++;
+									
+							},100);
+							
+							
+							// marble_animate();
+											
+						});
+											
+					});
+				});
+			});
+		
+		});
+
+function marble_animate() {
+	$('div.marble:eq(0)').shake( 15 );
+	$('div.marble:eq(1)').shake( 30 );
+	$('div.marble:eq(2)').shake( 20 );
+}
+
+$.fn.shake = function( shaking_rate ) {
+
+	var direction = 1;
+
+	var self = $(this);
+	$(this).data('shaking', true);
+	shake_horizon( $(this) );
+
+	function shake_horizon( element ) {
+		var top = element.offset().top;
+		var left = element.offset().left;
+		if ( direction  ) {
+			newTop = top + shaking_rate;
+			newLeft = left //+ 10;
+			direction = 0;
+		} else {
+			newTop = top - shaking_rate;
+			newLeft = left //- 7;
+			direction = 1;
+		}
+		element.animate({ 
+			top: newTop + 'px',
+			left: newLeft + 'px'
+		}, 'slow', function(){
+			if ( self.data('shaking') ) {
+				shake_horizon( $(this) );	
+			} else {
+				return true;
+			}
+		});
+	}
+	
+	function shake_vertical( element ) {
+
+	}
+}
+
+	</script>
+</head>
+<body>
+<div id="wrapper">
+
+
+	<div class="marble">
+		<div class="inner_text">
+		
+		</div>
+	</div>
+	
+	<div id="under_line">
+			
+	</div>
+	<div id="inner_wrapper">
+		
+	</div>
+	<div id="inner_wrapper2">
+		<ul>
+			<li>Web Design</li>
+			<li>Web Development</li>
+			<li>Application Development</li>
+			<li>IT Consulting</li>
+		</ul>
+	</div>
+	<div id="inner_wrapper3">
+		Please wait! The site is loading...
+		<!--
+		Our Site is still constructed!
+		You can contact us through twitter!
+		-->
+<!-- 		<br />
+		<div class="tweet_container">
+			<img src="mhk.png" />
+		</div>
+		<div class="tweet_container">
+			<img src="ksw.png" />			
+		</div>
+		<div class="tweet_container">
+			<img src="zn.png" />			
+		</div>	 -->			
+		<br /	>
+
+		<!--div class="tweet_container">
+			<div>www.twitter.com/eainmark</div>
+		</div>
+		
+		<div class="mail_container">
+			<div>admin@tribridstudio.com</div>		
+		</div-->
+	</div>
+	
+</div>
+<!-- <div id="wrapper">
+	<div id="head_twitter">
+		our voice
+	</div>
+	<div id="subscrib_form">
+		subscriber form
+	</div>
+</div> -->
+<iframe name="dev" id="dev" src="http://localhost/demo" />
+</body>
+</html>
